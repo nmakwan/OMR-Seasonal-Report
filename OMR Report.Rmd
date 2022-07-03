@@ -3,8 +3,54 @@ title: "OMR Report"
 author: "Nicole"
 date: '2022-06-22'
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+# Chipps
+```{r}
+chipps <- read.csv("Chipps Island Trawls LFS oct2021-june2022.csv", stringsAsFactors = F)
+chipps$SampleDate<-mdy(chipps$SampleDate)
+chipps$CatchCount<-as.numeric(chipps$CatchCount)
+
+#filter to >60mm
+chipps.ad <- filter(chipps, ForkLength >= 60)
+
+#plot catch over time
+ggplot(data=chipps.ad, aes(x=SampleDate, y=CatchCount)) +
+    geom_bar(stat="identity") +
+    theme_bw() +
+    ylab("LFS Catch") +
+    xlab("Month") +
+    scale_x_date(date_breaks = "1 month", date_labels = "%b")
+
+ggsave("chipps_plot.png", height=4, width=7, units="in")
+```
+# SLS & 20mm
+```{r}
+
+```
+#SLS & 20mm CSD stations
+```{r}
+
+```
+# BSPP
+```{r}
+
+```
+# Salvage
+```{r}
+
+```
+# Salvage & OMR flow
+```{r}
+
+```
+# Long-term YOY LFS salvage
 ```{r}
 
 ```
